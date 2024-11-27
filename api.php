@@ -1,6 +1,6 @@
 <?php
 
-header("Acces-Control-Allow: *");
+header("Acces-Control-Allow-Origin: *");
 $metodo = $_SERVER['REQUEST_METHOD'];
 
 $respuesta = [];
@@ -11,9 +11,19 @@ switch ($metodo) {
             'data' => $_GET
         ];
         break;
+    case 'POST':
+        $data_entrante = json_decode(file_get_contents("php://input"),true);
+        
+        $respuesta = [
+            'mensaje'=> 'Metodo Post Correcto',
+            'data' => $data_entrante
+        ];
     
     default:
         # code...
         break;
 }
 echo json_encode($respuesta);
+
+//caso post------------------------------
+
